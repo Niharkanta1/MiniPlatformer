@@ -14,7 +14,7 @@ public class PlayerHealthController : MonoBehaviour {
     public static PlayerHealthController instance;
     public int currentHealth, maxHealth = 6;
     public float iFrameTime;
-
+    
     private float iFrameCounter;
     private SpriteRenderer theSR;
 
@@ -49,8 +49,10 @@ public class PlayerHealthController : MonoBehaviour {
         }  else {
             iFrameCounter = iFrameTime;
             theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0.5f);
+            PlayerController.instance.Knockback();
         }
 
         UIController.instance.UpdateHealthUI();
     }
+
 }
