@@ -16,4 +16,5 @@ public class Spike : MonoBehaviour {
             collision.GetComponent<PlayerHealthController>().DealDamage();
         }
     }
+    
 }

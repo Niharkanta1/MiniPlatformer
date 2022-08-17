@@ -13,6 +13,7 @@ public class PlayerHealthController : MonoBehaviour {
 
     public static PlayerHealthController instance;
     public int currentHealth, maxHealth = 6;
+    public bool godMode;
     public float iFrameTime;
     
     private float iFrameCounter;
@@ -30,7 +31,7 @@ public class PlayerHealthController : MonoBehaviour {
     }
 
     private void Update() {
-        if(iFrameCounter >= 0) {
+        if(iFrameCounter > 0) {
             iFrameCounter -= Time.deltaTime;
             if(iFrameCounter <= 0) {
                 theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f);
@@ -42,7 +43,8 @@ public class PlayerHealthController : MonoBehaviour {
         if (iFrameCounter > 0)
             return;
         
-        currentHealth--;
+        if(!godMode) 
+            currentHealth--;
         if(currentHealth <= 0) {
             currentHealth = 0;
             gameObject.SetActive(false);

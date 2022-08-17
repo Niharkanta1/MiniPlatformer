@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
             }
         } else {
             knockbackCounter -= Time.deltaTime;
-            if(facingRight) {
+            if (facingRight) {
                 rigidBody.velocity = new Vector2(-knockbackForce, rigidBody.velocity.y);
             } else {
                 rigidBody.velocity = new Vector2(knockbackForce, rigidBody.velocity.y);
@@ -80,9 +80,9 @@ public class PlayerController : MonoBehaviour {
         animator.SetFloat("moveSpeedY", rigidBody.velocity.y);
     }
     public void Knockback() {
+        animator.SetTrigger("isHurt");
         knockbackCounter = knockbackTime;
         rigidBody.velocity = new Vector2(0f, knockbackForce);
-        animator.SetTrigger("isHurt");
     }
 
 }
