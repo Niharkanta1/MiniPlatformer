@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,8 +25,7 @@ public class PlayerHealthController : MonoBehaviour {
     }
 
     private void Start() {
-        currentHealth = maxHealth;
-        UIController.instance.UpdateHealthUI();
+        ResetPlayerHealth();
 
         theSR = GetComponent<SpriteRenderer>();
     }
@@ -45,9 +45,9 @@ public class PlayerHealthController : MonoBehaviour {
         
         if(!godMode) 
             currentHealth--;
+
         if(currentHealth <= 0) {
-            currentHealth = 0;
-            gameObject.SetActive(false);
+            PlayerDied();
         }  else {
             iFrameCounter = iFrameTime;
             theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0.5f);
@@ -57,4 +57,13 @@ public class PlayerHealthController : MonoBehaviour {
         UIController.instance.UpdateHealthUI();
     }
 
+    public void PlayerDied() {
+        currentHealth = 0;
+        SpawnManager.instance.RespawnPlayer();
+    }
+
+    public void ResetPlayerHealth() {
+        currentHealth = maxHealth;
+        UIController.instance.UpdateHealthUI();
+    }
 }
