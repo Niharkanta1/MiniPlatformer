@@ -12,7 +12,7 @@ Date:       24-07-2022 17:00:15
 public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
 
-    public const float GROUND_CHECK_RADIUS = 0.2f;
+    public const float GROUND_CHECK_RADIUS = 0.3f;
 
     public float moveSpeed = 8f;
     public Rigidbody2D rigidBody;
@@ -85,4 +85,9 @@ public class PlayerController : MonoBehaviour {
         rigidBody.velocity = new Vector2(0f, knockbackForce);
     }
 
+    private void OnDrawGizmosSelected() {
+        // Draw a yellow sphere for the ground check
+        Gizmos.color = new Color(0, 0, 1, 0.5f);
+        Gizmos.DrawSphere(groundCheckPoint.position, GROUND_CHECK_RADIUS);
+    }
 }
