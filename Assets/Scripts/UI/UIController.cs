@@ -91,7 +91,7 @@ public class UIController : MonoBehaviour {
         StartCoroutine(ScaleTransform(rectTransform, 1, 0.15f));
     }
 
-    IEnumerator ScaleTransform(RectTransform rectTransform, int animateAmnt, float animateDuration) {
+    private IEnumerator ScaleTransform(RectTransform rectTransform, int animateAmnt, float animateDuration) {
         for (int i = 0; i < animateAmnt; i++) {
             rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             yield return new WaitForSeconds(animateDuration);
