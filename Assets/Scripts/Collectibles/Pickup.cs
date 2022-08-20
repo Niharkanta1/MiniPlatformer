@@ -10,7 +10,7 @@ Date:       19-08-2022 19:30:37
 ================================================*/
     
 public class Pickup : MonoBehaviour {
-    public bool isGem;
+    public bool isGem, isHeal;
 
     private bool isCollected;
 
@@ -20,6 +20,16 @@ public class Pickup : MonoBehaviour {
                 LevelManager.instance.gemCollected++;
                 isCollected = true;
                 Destroy(gameObject);
+                UIController.instance.UpdateGemCollectedUI();
+            }
+
+            if(isHeal) {
+                if (PlayerHealthController.instance.currentHealth >= PlayerHealthController.instance.maxHealth) {
+                    return;
+                }
+                isCollected = true;
+                Destroy(gameObject);
+                PlayerHealthController.instance.HealPlayer();
             }
         }
     }

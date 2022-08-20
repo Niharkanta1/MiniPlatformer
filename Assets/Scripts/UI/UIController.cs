@@ -15,8 +15,14 @@ public class UIController : MonoBehaviour {
     public Image heart1, heart2, heart3;
     public Sprite heartFull, heartEmpty, heartHalf;
 
+    public Text gemText;
+
     private void Awake() {
         instance = this;
+    }
+
+    private void Start() {
+        UpdateGemCollectedUI();
     }
 
     public void UpdateHealthUI() {
@@ -56,6 +62,10 @@ public class UIController : MonoBehaviour {
                 ClearHealthUI();
                 break;
         }
+    }
+
+    public void UpdateGemCollectedUI() {
+        gemText.text = LevelManager.instance.gemCollected.ToString();
     }
 
     public void ClearHealthUI() {
