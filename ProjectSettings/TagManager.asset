@@ -17,7 +17,7 @@ TagManager:
   - Player
   - 
   - Collectible
-  - 
+  - Effects
   - 
   - 
   - 
@@ -41,11 +41,20 @@ TagManager:
   - name: BG
     uniqueID: 1625174431
     locked: 0
+  - name: World
+    uniqueID: 768019369
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: World
-    uniqueID: 768019369
+  - name: Pickups
+    uniqueID: 2928523343
+    locked: 0
+  - name: Effects
+    uniqueID: 2844088567
+    locked: 0
+  - name: Enemies
+    uniqueID: 2835059511
     locked: 0
   - name: Player
     uniqueID: 328298609

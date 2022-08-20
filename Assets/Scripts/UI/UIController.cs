@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour {
     public Sprite heartFull, heartEmpty, heartHalf;
 
     public Text gemText;
+    public RectTransform gemRectTransform;
 
     private void Awake() {
         instance = this;
@@ -31,31 +32,37 @@ public class UIController : MonoBehaviour {
                 heart1.sprite = heartFull;
                 heart2.sprite = heartFull;
                 heart3.sprite = heartFull;
+                AnimateHeart(heart3.rectTransform);
                 break;
             case 5:
                 heart1.sprite = heartFull;
                 heart2.sprite = heartFull;
                 heart3.sprite = heartHalf;
+                AnimateHeart(heart3.rectTransform);
                 break;
             case 4:
                 heart1.sprite = heartFull;
                 heart2.sprite = heartFull;
                 heart3.sprite = heartEmpty;
+                AnimateHeart(heart2.rectTransform);
                 break;
             case 3:
                 heart1.sprite = heartFull;
                 heart2.sprite = heartHalf;
                 heart3.sprite = heartEmpty;
+                AnimateHeart(heart2.rectTransform);
                 break;
             case 2:
                 heart1.sprite = heartFull;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                AnimateHeart(heart1.rectTransform);
                 break;
             case 1:
                 heart1.sprite = heartHalf;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+                AnimateHeart(heart1.rectTransform);
                 break;
 
             default:
@@ -66,11 +73,30 @@ public class UIController : MonoBehaviour {
 
     public void UpdateGemCollectedUI() {
         gemText.text = LevelManager.instance.gemCollected.ToString();
+        AnimateGems(gemRectTransform);
     }
 
     public void ClearHealthUI() {
         heart1.sprite = heartEmpty;
         heart2.sprite = heartEmpty;
         heart3.sprite = heartEmpty;
+    }
+
+    public void AnimateHeart(RectTransform rectTransform) {
+        StopAllCoroutines();
+        StartCoroutine(ScaleTransform(rectTransform, 2, 0.1f));
+    }
+
+    public void AnimateGems(RectTransform rectTransform) {
+        StartCoroutine(ScaleTransform(rectTransform, 1, 0.15f));
+    }
+
+    IEnumerator ScaleTransform(RectTransform rectTransform, int animateAmnt, float animateDuration) {
+        for (int i = 0; i < animateAmnt; i++) {
+            rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            yield return new WaitForSeconds(animateDuration);
+            rectTransform.localScale = new Vector3(1f, 1f, 1f);
+            yield return new WaitForSeconds(animateDuration);
+        }
     }
 }

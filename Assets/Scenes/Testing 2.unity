@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7710440445221320796, guid: d1ea1d12b450658449227481074c6187, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.014
       objectReference: {fileID: 0}
     - target: {fileID: 7710440445221320796, guid: d1ea1d12b450658449227481074c6187, type: 3}
       propertyPath: m_LocalPosition.z
@@ -570,6 +570,7 @@ MonoBehaviour:
   heartEmpty: {fileID: -4390673095631447188, guid: d9a616f95048ea84e8fc6f7920f846b8, type: 3}
   heartHalf: {fileID: 2139837793675082937, guid: d9a616f95048ea84e8fc6f7920f846b8, type: 3}
   gemText: {fileID: 1707336601}
+  gemRectTransform: {fileID: 835600473}
 --- !u!1 &369807392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7710440445221320770, guid: d1ea1d12b450658449227481074c6187, type: 3}
@@ -591,6 +592,7 @@ MonoBehaviour:
   maxHealth: 6
   godMode: 0
   iFrameTime: 1
+  deathEffect: {fileID: 8719936625687947044, guid: 10974b3f35c3ae3438884d51490a4a5f, type: 3}
 --- !u!1001 &428564181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7015,7 +7017,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 768019369
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -7297,7 +7299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1325869101320450543, guid: d62bc0f4e2840fa419a4a3eb92e40dcc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.77
+      value: -1.7759999
       objectReference: {fileID: 0}
     - target: {fileID: 1325869101320450543, guid: d62bc0f4e2840fa419a4a3eb92e40dcc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7321,7 +7323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1325869102284822130, guid: d62bc0f4e2840fa419a4a3eb92e40dcc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.77
+      value: -1.7759999
       objectReference: {fileID: 0}
     - target: {fileID: 1325869102284822130, guid: d62bc0f4e2840fa419a4a3eb92e40dcc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13881,7 +13883,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 9f31de6000000000a90bc72d71709113
+  m_ApplyToSortingLayers: 9f31de6000000000a90bc72d717091134fb88daef75885a93793fba8
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

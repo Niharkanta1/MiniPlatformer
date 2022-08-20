@@ -16,7 +16,8 @@ public class PlayerHealthController : MonoBehaviour {
     public int currentHealth, maxHealth = 6;
     public bool godMode;
     public float iFrameTime;
-    
+    public GameObject deathEffect;
+
     private float iFrameCounter;
     private SpriteRenderer theSR;
 
@@ -59,6 +60,7 @@ public class PlayerHealthController : MonoBehaviour {
 
     public void PlayerDied() {
         currentHealth = 0;
+        Instantiate(deathEffect, transform.position, transform.rotation);
         SpawnManager.instance.RespawnPlayer();
     }
 

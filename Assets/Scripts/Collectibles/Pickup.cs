@@ -14,12 +14,14 @@ public class Pickup : MonoBehaviour {
 
     private bool isCollected;
 
+    public GameObject pickupEffect;
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player") && !isCollected) {
             if(isGem) {
                 LevelManager.instance.gemCollected++;
                 isCollected = true;
-                Destroy(gameObject);
+                DestroyPickup();
                 UIController.instance.UpdateGemCollectedUI();
             }
 
@@ -28,9 +30,14 @@ public class Pickup : MonoBehaviour {
                     return;
                 }
                 isCollected = true;
-                Destroy(gameObject);
+                DestroyPickup();
                 PlayerHealthController.instance.HealPlayer();
             }
         }
+    }
+
+    private void DestroyPickup() {
+        Destroy(gameObject);
+        Instantiate(pickupEffect, transform.position, transform.rotation);
     }
 }
