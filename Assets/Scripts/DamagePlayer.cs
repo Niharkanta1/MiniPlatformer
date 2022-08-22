@@ -9,7 +9,7 @@ Company:    DWG
 Date:       04-08-2022 01:00:47
 ================================================*/
     
-public class Spike : MonoBehaviour {
+public class DamagePlayer : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.CompareTag("Player")) {

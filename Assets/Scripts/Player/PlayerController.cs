@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     public Animator animator;
 
     public float jumpForce = 12f;
+    public float bounceForce = 10f;
 
     public Transform groundCheckPoint;
     public LayerMask groundLayerMask;
@@ -83,6 +84,10 @@ public class PlayerController : MonoBehaviour {
         animator.SetTrigger("isHurt");
         knockbackCounter = knockbackTime;
         rigidBody.velocity = new Vector2(0f, knockbackForce);
+    }
+
+    public void Bounce() {
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, bounceForce);
     }
 
     private void OnDrawGizmosSelected() {
