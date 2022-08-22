@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
 
     public const float GROUND_CHECK_RADIUS = 0.3f;
+    
+    public const int PLAYER_JUMP_SFX = 10;
+    public const int PLAYER_HURT_SFX = 9;
 
     public float moveSpeed = 8f;
     public Rigidbody2D rigidBody;
@@ -50,12 +54,11 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Jump")) {
                 if (isGrounded) {
-                    rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
-
+                    PerformJump();
                 } else {
 
                     if (canDoubleJump) {
-                        rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+                        PerformJump();
                         canDoubleJump = false;
                     }
                 }
@@ -80,14 +83,22 @@ public class PlayerController : MonoBehaviour {
         animator.SetFloat("moveSpeedX", Mathf.Abs(rigidBody.velocity.x));
         animator.SetFloat("moveSpeedY", rigidBody.velocity.y);
     }
+
+    private void PerformJump() {
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+        AudioManager.instance.PlaySFX(PLAYER_JUMP_SFX);
+    }
+
     public void Knockback() {
         animator.SetTrigger("isHurt");
         knockbackCounter = knockbackTime;
         rigidBody.velocity = new Vector2(0f, knockbackForce);
+        AudioManager.instance.PlaySFX(PLAYER_HURT_SFX);
     }
 
     public void Bounce() {
         rigidBody.velocity = new Vector2(rigidBody.velocity.x, bounceForce);
+        AudioManager.instance.PlaySFX(PLAYER_JUMP_SFX);
     }
 
     private void OnDrawGizmosSelected() {

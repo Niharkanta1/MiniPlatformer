@@ -13,6 +13,9 @@ Date:       04-08-2022 00:54:49
 public class PlayerHealthController : MonoBehaviour {
 
     public static PlayerHealthController instance;
+
+    public const int PLAYER_DEATH_SFX = 8;
+
     public int currentHealth, maxHealth = 6;
     public bool godMode;
     public float iFrameTime;
@@ -61,6 +64,7 @@ public class PlayerHealthController : MonoBehaviour {
     public void PlayerDied() {
         currentHealth = 0;
         Instantiate(deathEffect, transform.position, transform.rotation);
+        AudioManager.instance.PlaySFX(PLAYER_DEATH_SFX);
         SpawnManager.instance.RespawnPlayer();
     }
 
