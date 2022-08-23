@@ -10,6 +10,9 @@ Date:       19-08-2022 19:30:37
 ================================================*/
     
 public class Pickup : MonoBehaviour {
+    public const int HEALTH_PICKUP_SFX = 7;
+    public const int GEM_PICKUP_SFX = 6;
+
     public bool isGem, isHeal;
 
     private bool isCollected;
@@ -21,7 +24,7 @@ public class Pickup : MonoBehaviour {
             if(isGem) {
                 LevelManager.instance.gemCollected++;
                 isCollected = true;
-                DestroyPickup();
+                DestroyPickup(GEM_PICKUP_SFX);
                 UIController.instance.UpdateGemCollectedUI();
             }
 
@@ -30,14 +33,15 @@ public class Pickup : MonoBehaviour {
                     return;
                 }
                 isCollected = true;
-                DestroyPickup();
+                DestroyPickup(HEALTH_PICKUP_SFX);
                 PlayerHealthController.instance.HealPlayer();
             }
         }
     }
 
-    private void DestroyPickup() {
+    private void DestroyPickup(int sfx) {
         Destroy(gameObject);
         Instantiate(pickupEffect, transform.position, transform.rotation);
+        AudioManager.instance.PlaySFX(sfx);
     }
 }
