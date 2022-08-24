@@ -18,7 +18,11 @@ public class PlayerHealthController : MonoBehaviour {
 
     public int currentHealth, maxHealth = 6;
     public bool godMode;
+
     public float iFrameTime;
+    public Color flashColor1;
+    public Color flashColor2;
+    public float flashDuration;
     public GameObject deathEffect;
 
     private float iFrameCounter;
@@ -38,7 +42,8 @@ public class PlayerHealthController : MonoBehaviour {
         if(iFrameCounter > 0) {
             iFrameCounter -= Time.deltaTime;
             if(iFrameCounter <= 0) {
-                theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f);
+                StopAllCoroutines();
+                theSR.color = Color.white;
             }
         }
     }
@@ -54,11 +59,21 @@ public class PlayerHealthController : MonoBehaviour {
             PlayerDied();
         }  else {
             iFrameCounter = iFrameTime;
-            theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0.5f);
+            StopAllCoroutines();
+            StartCoroutine(FlashEffect());
             PlayerController.instance.Knockback();
         }
 
         UIController.instance.UpdateHealthUI();
+    }
+
+    private IEnumerator FlashEffect() {
+        while(iFrameCounter > 0) {
+            theSR.color = flashColor1;
+            yield return new WaitForSeconds(flashDuration);
+            theSR.color = flashColor2;
+            yield return new WaitForSeconds(flashDuration);
+        }
     }
 
     public void PlayerDied() {

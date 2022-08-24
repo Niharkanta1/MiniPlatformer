@@ -18,12 +18,41 @@ public class UIController : MonoBehaviour {
     public Text gemText;
     public RectTransform gemRectTransform;
 
+    public Image fadeScreen;
+    public float fadeSpeed;
+    public float fadeTime;
+    public bool shouldFadeToBlack, shouldFadeFromBlack;
+
     private void Awake() {
         instance = this;
     }
 
     private void Start() {
         UpdateGemCollectedUI();
+        FadeFromBlack();
+    }
+
+    private void Update() {
+        if(shouldFadeToBlack) {
+            fadeScreen.color = new Color(
+                fadeScreen.color.r,
+                fadeScreen.color.g,
+                fadeScreen.color.b,
+                Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+            if(fadeScreen.color.a == 1) {
+                shouldFadeToBlack = false;
+            }
+        }
+        if (shouldFadeFromBlack) {
+            fadeScreen.color = new Color(
+                fadeScreen.color.r,
+                fadeScreen.color.g,
+                fadeScreen.color.b,
+                Mathf.MoveTowards(fadeScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+            if (fadeScreen.color.a == 0) {
+                shouldFadeFromBlack = false;
+            }
+        }
     }
 
     public void UpdateHealthUI() {
@@ -98,5 +127,15 @@ public class UIController : MonoBehaviour {
             rectTransform.localScale = new Vector3(1f, 1f, 1f);
             yield return new WaitForSeconds(animateDuration);
         }
+    }
+
+    public void FadeToBlack() {
+        shouldFadeToBlack = true;
+        shouldFadeFromBlack = false;
+    }
+
+    public void FadeFromBlack() {
+        shouldFadeFromBlack = true;
+        shouldFadeToBlack = false;
     }
 }

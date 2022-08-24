@@ -15,12 +15,10 @@ public class MainMenu : MonoBehaviour {
     public string startScene;
 
     public void StartGame() {
-        Debug.Log("Start Game...");
         SceneManager.LoadScene(startScene);
     }
 
     public void QuitGame() {
         Application.Quit();
-        Debug.Log("Quiting Game.."); 
     }
 }

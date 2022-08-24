@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        if (PauseMenu.instance.isPaused)
+            return;
+
         if(knockbackCounter <= 0) {
             rigidBody.velocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), rigidBody.velocity.y);
             isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, GROUND_CHECK_RADIUS, groundLayerMask);

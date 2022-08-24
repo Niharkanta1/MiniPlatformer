@@ -45,7 +45,10 @@ public class SpawnManager : MonoBehaviour {
 
     private IEnumerator RespawnCoroutine() {
         PlayerController.instance.gameObject.SetActive(false);
-        yield return new WaitForSeconds(waitToRespawn);
+        yield return new WaitForSeconds(waitToRespawn - (1/ UIController.instance.fadeSpeed));
+        UIController.instance.FadeToBlack();
+        yield return new WaitForSeconds((1f / UIController.instance.fadeSpeed) + UIController.instance.fadeTime);
+        UIController.instance.FadeFromBlack();
         PlayerController.instance.transform.position = spawnPoint;
         PlayerController.instance.gameObject.SetActive(true);
         PlayerHealthController.instance.ResetPlayerHealth();
