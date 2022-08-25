@@ -239,7 +239,7 @@ MonoBehaviour:
   groundCheckPoint: {fileID: 7710440446420368991}
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
   isGrounded: 0
   canDoubleJump: 0
   facingRight: 1
@@ -261,6 +261,9 @@ MonoBehaviour:
   maxHealth: 6
   godMode: 0
   iFrameTime: 1
+  flashColor1: {r: 0, g: 0, b: 0, a: 0}
+  flashColor2: {r: 0, g: 0, b: 0, a: 0}
+  flashDuration: 0
   deathEffect: {fileID: 8719936625687947044, guid: 10974b3f35c3ae3438884d51490a4a5f, type: 3}
 --- !u!1 &7710440446420368988
 GameObject:

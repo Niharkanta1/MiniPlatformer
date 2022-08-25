@@ -109,4 +109,16 @@ public class PlayerController : MonoBehaviour {
         Gizmos.color = new Color(0, 0, 1, 0.5f);
         Gizmos.DrawSphere(groundCheckPoint.position, GROUND_CHECK_RADIUS);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.CompareTag("Platform")) {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision) {
+        if(collision.gameObject.CompareTag("Platform")) {
+            transform.parent = null;
+        }
+    }
 }
