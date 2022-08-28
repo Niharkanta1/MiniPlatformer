@@ -19,7 +19,7 @@ public class StompBox : MonoBehaviour {
     public float chanceToDrop;
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.CompareTag("Enemy") && PlayerController.instance.rigidBody.velocity.y < 0) {
+        if(collision.CompareTag("Enemy") && PlayerController.instance.rigidBody.velocity.y <= 0) {
             collision.transform.parent.gameObject.SetActive(false);
             Instantiate(deathEffect, collision.transform.position, collision.transform.rotation);
             AudioManager.instance.PlaySFX(ENEMY_EXPLODE_SFX);

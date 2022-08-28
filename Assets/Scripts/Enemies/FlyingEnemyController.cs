@@ -14,9 +14,13 @@ public class FlyingEnemyController : MonoBehaviour {
     public float moveSpeed;
     public int currentPoint;
 
-    public SpriteRenderer theSR;
     public float attackRange;
     public float attackSpeed;
+    public float nextAttackTimer;
+
+    private Vector3 attackTarget;
+    private float attackTimeCounter;
+    private SpriteRenderer theSR;
 
     private void Start() {
         theSR = GetComponentInChildren<SpriteRenderer>();
@@ -27,31 +31,43 @@ public class FlyingEnemyController : MonoBehaviour {
 
     private void Update() {
 
-        if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) > attackRange) {
+        if(attackTimeCounter > 0) {
+            attackTimeCounter -= Time.deltaTime;
 
-            transform.position = Vector3.MoveTowards(transform.position,
-            points[currentPoint].position,
-            moveSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, points[currentPoint].position) < 0.05f) {
-                currentPoint++;
-                if (currentPoint >= points.Length) {
-                    currentPoint = 0;
-                }
-            }
-            if (transform.position.x < points[currentPoint].position.x) {
-                transform.localScale = new Vector3(-1, 1, 1);
-            } else if (transform.position.x > points[currentPoint].position.x) {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
         } else {
 
-            transform.position = Vector3.MoveTowards(transform.position,
-                PlayerController.instance.transform.position,
-                attackSpeed * Time.deltaTime);
-        }
+            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) > attackRange) {
+                attackTarget = Vector3.zero;
 
-        
+                transform.position = Vector3.MoveTowards(transform.position,
+                points[currentPoint].position,
+                moveSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, points[currentPoint].position) < 0.05f) {
+                    currentPoint++;
+                    if (currentPoint >= points.Length) {
+                        currentPoint = 0;
+                    }
+                }
+                if (transform.position.x < points[currentPoint].position.x) {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                } else if (transform.position.x > points[currentPoint].position.x) {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+            } else { // Attack Player
+                if (attackTarget == Vector3.zero) {
+                    attackTarget = PlayerController.instance.transform.position;
+                }
+                transform.position = Vector3.MoveTowards(transform.position,
+                    attackTarget,
+                    attackSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, attackTarget) <= 0.1f) {
+                    attackTimeCounter = nextAttackTimer;
+                    attackTarget = Vector3.zero;
+                }
+            }
+        }  
 
     }
 }
