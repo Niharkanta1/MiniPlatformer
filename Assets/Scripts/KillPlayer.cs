@@ -9,7 +9,7 @@ Company:    DWG
 Date:       17-08-2022 23:06:55
 ================================================*/
     
-public class PitDetector : MonoBehaviour {
+public class KillPlayer : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.CompareTag("Player")) {

@@ -104,12 +104,6 @@ public class PlayerController : MonoBehaviour {
         AudioManager.instance.PlaySFX(PLAYER_JUMP_SFX);
     }
 
-    private void OnDrawGizmosSelected() {
-        // Draw a yellow sphere for the ground check
-        Gizmos.color = new Color(0, 0, 1, 0.5f);
-        Gizmos.DrawSphere(groundCheckPoint.position, GROUND_CHECK_RADIUS);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.CompareTag("Platform")) {
             transform.parent = collision.transform;
@@ -121,4 +115,14 @@ public class PlayerController : MonoBehaviour {
             transform.parent = null;
         }
     }
+
+#if UNITY_EDITOR
+
+    private void OnDrawGizmosSelected() {
+        // Draw a yellow sphere for the ground check
+        Gizmos.color = new Color(0, 0, 1, 0.5f);
+        Gizmos.DrawSphere(groundCheckPoint.position, GROUND_CHECK_RADIUS);
+    }
+
+#endif
 }
