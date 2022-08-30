@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     public float knockbackTime, knockbackForce;
 
     private float knockbackCounter;
+    private bool stopInput;
 
     private void Awake() {
         instance = this;
@@ -45,40 +46,40 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-        if (PauseMenu.instance.isPaused)
-            return;
+        if (!PauseMenu.instance.isPaused && !stopInput) {
 
-        if(knockbackCounter <= 0) {
-            rigidBody.velocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), rigidBody.velocity.y);
-            isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, GROUND_CHECK_RADIUS, groundLayerMask);
-            if (isGrounded) {
-                canDoubleJump = true;
-            }
-
-            if (Input.GetButtonDown("Jump")) {
+            if (knockbackCounter <= 0) {
+                rigidBody.velocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), rigidBody.velocity.y);
+                isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, GROUND_CHECK_RADIUS, groundLayerMask);
                 if (isGrounded) {
-                    PerformJump();
-                } else {
+                    canDoubleJump = true;
+                }
 
-                    if (canDoubleJump) {
+                if (Input.GetButtonDown("Jump")) {
+                    if (isGrounded) {
                         PerformJump();
-                        canDoubleJump = false;
+                    } else {
+
+                        if (canDoubleJump) {
+                            PerformJump();
+                            canDoubleJump = false;
+                        }
                     }
                 }
-            }
-            if (rigidBody.velocity.x < 0) {
-                transform.localScale = (new Vector3(-1, 1, 1));
-                facingRight = false;
-            } else if (rigidBody.velocity.x > 0) {
-                transform.localScale = (new Vector3(1, 1, 1));
-                facingRight = true;
-            }
-        } else {
-            knockbackCounter -= Time.deltaTime;
-            if (facingRight) {
-                rigidBody.velocity = new Vector2(-knockbackForce, rigidBody.velocity.y);
+                if (rigidBody.velocity.x < 0) {
+                    transform.localScale = (new Vector3(-1, 1, 1));
+                    facingRight = false;
+                } else if (rigidBody.velocity.x > 0) {
+                    transform.localScale = (new Vector3(1, 1, 1));
+                    facingRight = true;
+                }
             } else {
-                rigidBody.velocity = new Vector2(knockbackForce, rigidBody.velocity.y);
+                knockbackCounter -= Time.deltaTime;
+                if (facingRight) {
+                    rigidBody.velocity = new Vector2(-knockbackForce, rigidBody.velocity.y);
+                } else {
+                    rigidBody.velocity = new Vector2(knockbackForce, rigidBody.velocity.y);
+                }
             }
         }
 
@@ -114,6 +115,17 @@ public class PlayerController : MonoBehaviour {
         if(collision.gameObject.CompareTag("Platform")) {
             transform.parent = null;
         }
+    }
+
+    public void StopInput() {
+        stopInput = true;
+        isGrounded = true;
+        StartCoroutine(StopInputCoroutine());
+    }
+
+    private IEnumerator StopInputCoroutine() {
+        yield return new WaitForSeconds(0.5f);
+        rigidBody.velocity = Vector2.zero;
     }
 
 #if UNITY_EDITOR

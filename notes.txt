@@ -1,0 +1,4 @@
+Recheck Parallax Effect
+- Far background is not moving with the player.
+
+Stomp sometimes kills enemy from below.

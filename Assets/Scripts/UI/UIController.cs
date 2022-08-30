@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour {
     public Sprite heartFull, heartEmpty, heartHalf;
 
     public Text gemText;
+    public GameObject levelCompleteText;
     public RectTransform gemRectTransform;
 
     public Image fadeScreen;
