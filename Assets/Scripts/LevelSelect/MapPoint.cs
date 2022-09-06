@@ -12,4 +12,5 @@ Date:       05-09-2022 22:38:50
 public class MapPoint : MonoBehaviour {
     public MapPoint up, right, down, left;
     public bool isLevel;
+    public string levelToLoad;
 }

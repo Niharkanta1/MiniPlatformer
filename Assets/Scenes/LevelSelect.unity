@@ -12490,6 +12490,10 @@ PrefabInstance:
       propertyPath: isLevel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2460363011861625471, guid: df7de94886db20b4692d6fc87a66b999, type: 3}
+      propertyPath: levelToLoad
+      value: Testing 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2464507309050708344, guid: df7de94886db20b4692d6fc87a66b999, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -14282,6 +14286,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c74842d3d813a48b145cdfca1292fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2115159989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2115159990}
+  - component: {fileID: 2115159991}
+  m_Layer: 0
+  m_Name: LSManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2115159990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115159989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.0756474, y: -1.3229803, z: -25.79392}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2115159991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115159989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1252143ec22c7f4fa55eb9bd73e6da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 330065771}
 --- !u!1001 &2464507310029381880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14296,6 +14344,10 @@ PrefabInstance:
     - target: {fileID: 2460363011861625471, guid: df7de94886db20b4692d6fc87a66b999, type: 3}
       propertyPath: isLevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2460363011861625471, guid: df7de94886db20b4692d6fc87a66b999, type: 3}
+      propertyPath: levelToLoad
+      value: Testing 2
       objectReference: {fileID: 0}
     - target: {fileID: 2464507309050708344, guid: df7de94886db20b4692d6fc87a66b999, type: 3}
       propertyPath: m_RootOrder

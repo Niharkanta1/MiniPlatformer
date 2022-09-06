@@ -14,6 +14,8 @@ public class PlayerIcon : MonoBehaviour {
     public MapPoint currentPoint;
     public float moveSpeed = 10f;
 
+    private bool levelLoading;
+
     private void Start() {
         currentPoint = startPoint;
         transform.position = currentPoint.transform.position;
@@ -22,7 +24,7 @@ public class PlayerIcon : MonoBehaviour {
     private void Update() {
         transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, currentPoint.transform.position) > 0.1f)
+        if (Vector3.Distance(transform.position, currentPoint.transform.position) > 0.1f || levelLoading)
             return;
 
         if(Input.GetAxisRaw("Horizontal") > 0.5f) {
@@ -43,6 +45,12 @@ public class PlayerIcon : MonoBehaviour {
         if (Input.GetAxisRaw("Vertical") < -0.5f) {
             if (currentPoint.down != null) {
                 SetNextPoint(currentPoint.down);
+            }
+        }
+        if(currentPoint.isLevel) {
+            if(Input.GetButtonDown("Jump")) {
+                levelLoading = true;
+                LSManager.instance.LoadLevel();
             }
         }
     }
