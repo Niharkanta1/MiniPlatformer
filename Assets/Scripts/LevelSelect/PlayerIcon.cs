@@ -47,7 +47,9 @@ public class PlayerIcon : MonoBehaviour {
                 SetNextPoint(currentPoint.down);
             }
         }
-        if(currentPoint.isLevel) {
+        if(currentPoint.isLevel && currentPoint.levelToLoad != "" && !currentPoint.isLocked) { 
+            LSUIController.instance.ShowInfo(currentPoint);
+
             if(Input.GetButtonDown("Jump")) {
                 levelLoading = true;
                 LSManager.instance.LoadLevel();
@@ -57,5 +59,6 @@ public class PlayerIcon : MonoBehaviour {
 
     public void SetNextPoint(MapPoint next) {
         currentPoint = next;
+        LSUIController.instance.HideInfo();
     } 
 }
