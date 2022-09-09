@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,17 @@ public class LevelManager : MonoBehaviour {
     public int gemCollected;
     public string levelToLoad;
 
+    public float timeInLevel;
+
     private void Awake() {
         instance = this;
+    }
+    private void Start() {
+        timeInLevel = 0f;
+    }
+
+    private void Update() {
+        timeInLevel += Time.deltaTime;
     }
 
     public void EndLevel() {
@@ -37,7 +47,27 @@ public class LevelManager : MonoBehaviour {
         UIController.instance.FadeToBlack();
         yield return new WaitForSeconds((1f / UIController.instance.fadeSpeed) + 0.25f);
 
-        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);
+        SaveLevelData();
         SceneManager.LoadScene(levelToLoad);
+    }
+
+    private void SaveLevelData() {
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);
+        
+        if(PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_gems")) {
+            if(PlayerPrefs.GetInt(SceneManager.GetActiveScene().name) < gemCollected) {
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_gems", gemCollected);
+            }
+        } else {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_gems", gemCollected);
+        }
+
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_time")) {
+            if (PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name) > timeInLevel) {
+                PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_time", timeInLevel);
+            }
+        } else {
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_time", timeInLevel);
+        }
     }
 }

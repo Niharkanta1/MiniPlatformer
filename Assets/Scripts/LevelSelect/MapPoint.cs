@@ -18,9 +18,17 @@ public class MapPoint : MonoBehaviour {
     public string levelName;
     public bool isLocked;
 
+    public int gemCount;
+    public int gemCollected;
+    public float targetTime;
+    public float bestTime;
+
     private void Start() {
         levelName = GetReadableLevelName(levelToLoad);
         if(isLevel && levelToLoad != null) {
+
+            LoadSavedData();
+
             isLocked = true; 
             if (levelToCheck != null) {
                 if(PlayerPrefs.HasKey(levelToCheck+"_unlocked") && PlayerPrefs.GetInt(levelToCheck + "_unlocked") == 1) {
@@ -33,6 +41,13 @@ public class MapPoint : MonoBehaviour {
                 isLocked = false;
             }
         }
+    }
+
+    private void LoadSavedData() {
+        if (PlayerPrefs.HasKey(levelToLoad + "_gems"))
+            gemCollected = PlayerPrefs.GetInt(levelToLoad + "_gems");
+        if (PlayerPrefs.HasKey(levelToLoad + "_time"))
+            bestTime = PlayerPrefs.GetFloat(levelToLoad + "_time");
     }
 
     private string GetReadableLevelName(string levelToLoad) {
