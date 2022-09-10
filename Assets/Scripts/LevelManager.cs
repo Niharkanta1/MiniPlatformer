@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour {
 
     private void SaveLevelData() {
         PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);
+        PlayerPrefs.SetString("CurrentLevel", SceneManager.GetActiveScene().name);
         
         if(PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_gems")) {
             if(PlayerPrefs.GetInt(SceneManager.GetActiveScene().name) < gemCollected) {

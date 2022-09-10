@@ -66,6 +66,11 @@ public class FlyingEnemyController : MonoBehaviour {
                     attackTimeCounter = nextAttackTimer;
                     attackTarget = Vector3.zero;
                 }
+                if (transform.position.x < attackTarget.x) {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                } else if (transform.position.x > attackTarget.x) {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
             }
         }  
 

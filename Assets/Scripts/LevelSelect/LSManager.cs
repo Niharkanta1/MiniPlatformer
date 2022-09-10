@@ -14,8 +14,21 @@ public class LSManager : MonoBehaviour {
     public static LSManager instance;
     public PlayerIcon player;
 
+    private MapPoint[] allPoints;
+
     private void Awake() {
         instance = this;
+    }
+    private void Start() {
+        allPoints = FindObjectsOfType<MapPoint>();
+        if(PlayerPrefs.HasKey("CurrentLevel")) {
+            foreach(var point in allPoints) {
+                if(point.levelToLoad == PlayerPrefs.GetString("CurrentLevel")) {
+                    player.transform.position = point.transform.position;
+                    player.currentPoint = point;
+                }
+            }
+        }
     }
 
     public void LoadLevel() {
