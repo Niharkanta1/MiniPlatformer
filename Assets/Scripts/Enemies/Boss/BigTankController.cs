@@ -1,0 +1,90 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/*=============================================
+Product:    2DPlatformerMini v1.0
+Developer:  Nihar
+Company:    DWG
+Date:       12-09-2022 19:25:46
+================================================*/
+    
+public class BigTankController : MonoBehaviour {
+
+    public enum BossState { shooting, hurt, moving };
+    public BossState currentState;
+
+    public Transform theBoss;
+    public Animator anim;
+
+    [Header("Movement")]
+    public float moveSpeed;
+    public Transform leftPoint, rightPoint;
+    public bool moveRight;
+    
+    [Header("Shooting")]
+    public GameObject bullet;
+    public Transform firePoint;
+    public float timeBetweenShots;
+    private float shotCounter;
+
+    [Header("Hurt")]
+    public float hurtTime;
+    private float hurtTimeCounter;
+
+    private void Start() {
+        currentState = BossState.shooting;
+    }
+
+    private void Update() {
+        switch (currentState) {
+            case BossState.shooting:
+
+                break;
+            case BossState.hurt:
+                if(hurtTimeCounter > 0) {
+                    hurtTimeCounter -= Time.deltaTime;
+                    if(hurtTimeCounter <= 0) {
+                        currentState = BossState.moving;
+                    }
+                }
+                break;
+            case BossState.moving:
+                if(moveRight) {
+                    theBoss.position += new Vector3(moveSpeed * Time.deltaTime, 0f, 0f);
+                    if(theBoss.position.x >= rightPoint.position.x) {
+                        theBoss.localScale = new Vector3(1f, 1f, 1f);
+                        moveRight = false;
+                        EndMovement();
+                    }
+                } else {
+                    theBoss.position += new Vector3(-moveSpeed * Time.deltaTime, 0f, 0f);
+                    if (theBoss.position.x <= leftPoint.position.x) {
+                        theBoss.localScale = new Vector3(-1f, 1f, 1f);
+                        moveRight = true;
+                        EndMovement();
+                    }
+                }       
+                break;
+        }
+
+#if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.H)) {
+            TakeHit();
+        }
+
+#endif
+    }
+
+    public void TakeHit() {
+        currentState = BossState.hurt;
+        hurtTimeCounter = hurtTime;
+        anim.SetTrigger("Hit");
+    }
+
+    private void EndMovement() {
+        currentState = BossState.shooting;
+        shotCounter = timeBetweenShots;
+        anim.SetTrigger("Stop");
+    }
+}
