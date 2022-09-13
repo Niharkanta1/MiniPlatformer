@@ -26,7 +26,7 @@ public class BigTankController : MonoBehaviour {
     public GameObject bullet;
     public Transform firePoint;
     public float timeBetweenShots;
-    private float shotCounter;
+    public float shotCounter;
 
     [Header("Hurt")]
     public float hurtTime;
@@ -39,7 +39,12 @@ public class BigTankController : MonoBehaviour {
     private void Update() {
         switch (currentState) {
             case BossState.shooting:
-
+                shotCounter -= Time.deltaTime;
+                if(shotCounter <= 0) {
+                    shotCounter = timeBetweenShots;
+                    var newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    newBullet.transform.localScale = theBoss.localScale;
+                }
                 break;
             case BossState.hurt:
                 if(hurtTimeCounter > 0) {
