@@ -30,7 +30,9 @@ public class BigTankController : MonoBehaviour {
 
     [Header("Hurt")]
     public float hurtTime;
+    public GameObject hitBox;
     private float hurtTimeCounter;
+       
 
     private void Start() {
         currentState = BossState.shooting;
@@ -89,7 +91,8 @@ public class BigTankController : MonoBehaviour {
 
     private void EndMovement() {
         currentState = BossState.shooting;
-        shotCounter = timeBetweenShots;
+        shotCounter = 0f;
         anim.SetTrigger("Stop");
+        hitBox.SetActive(true);
     }
 }
