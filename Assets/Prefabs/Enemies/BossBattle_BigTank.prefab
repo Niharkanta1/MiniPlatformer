@@ -71,6 +71,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossController: {fileID: 0}
+--- !u!1 &6296048398189453609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3557889447807185402}
+  m_Layer: 0
+  m_Name: MinePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3557889447807185402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296048398189453609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.01, y: -1.21, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7907061888666836455}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7907061887322546582
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,10 +246,13 @@ MonoBehaviour:
   moveRight: 0
   bullet: {fileID: 0}
   firePoint: {fileID: 7907061888109702651}
-  timeBetweenShots: 1.5
+  timeBetweenShots: 2
   shotCounter: 0
   hurtTime: 1
   hitBox: {fileID: 5441818076173258880}
+  mines: {fileID: 0}
+  minePoint: {fileID: 0}
+  timeBetweenMines: 0
 --- !u!1 &7907061888666836450
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,6 +284,7 @@ Transform:
   m_Children:
   - {fileID: 7907061888109702651}
   - {fileID: 591194229317401081}
+  - {fileID: 3557889447807185402}
   m_Father: {fileID: 7907061888629067699}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

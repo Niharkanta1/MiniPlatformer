@@ -32,7 +32,12 @@ public class BigTankController : MonoBehaviour {
     public float hurtTime;
     public GameObject hitBox;
     private float hurtTimeCounter;
-       
+
+    [Header("Mines")]
+    public GameObject mines;
+    public Transform minePoint;
+    public float timeBetweenMines;
+    private float mineTimeCounter;
 
     private void Start() {
         currentState = BossState.shooting;
@@ -53,6 +58,7 @@ public class BigTankController : MonoBehaviour {
                     hurtTimeCounter -= Time.deltaTime;
                     if(hurtTimeCounter <= 0) {
                         currentState = BossState.moving;
+                        mineTimeCounter = timeBetweenMines;
                     }
                 }
                 break;
@@ -71,7 +77,12 @@ public class BigTankController : MonoBehaviour {
                         moveRight = true;
                         EndMovement();
                     }
-                }       
+                }
+                mineTimeCounter -= Time.deltaTime;
+                if(mineTimeCounter <= 0) {
+                    mineTimeCounter = timeBetweenMines;
+                    Instantiate(mines, minePoint.position, minePoint.rotation);
+                }
                 break;
         }
 

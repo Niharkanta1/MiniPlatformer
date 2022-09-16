@@ -8914,6 +8914,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7461861221769423551, guid: ff46affcc3fd98a488004f3340bc9878, type: 3}
   m_PrefabInstance: {fileID: 1712740056}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1719057692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7907061888629067696, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+  m_PrefabInstance: {fileID: 7907061887366456945}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24393ccb88fba0d43bda86bc6c687e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1865647261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 320958702268731595, guid: 6ec56d157fe51cf47809476b380c29cb, type: 3}
@@ -17203,10 +17214,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 203149202819907634, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+      propertyPath: bossController
+      value: 
+      objectReference: {fileID: 1719057692}
+    - target: {fileID: 3557889447807185402, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907061887322546585, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907061887773488132, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907061888629067696, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+      propertyPath: mines
+      value: 
+      objectReference: {fileID: 2668852365395243638, guid: 41768a90cb2a7574a9a639909ce9be29, type: 3}
     - target: {fileID: 7907061888629067696, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
       propertyPath: bullet
       value: 
       objectReference: {fileID: 3320961718922993968, guid: bb940c5ab53e948438cd7fe5ed8b705d, type: 3}
+    - target: {fileID: 7907061888629067696, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+      propertyPath: minePoint
+      value: 
+      objectReference: {fileID: 7907061887366456946}
+    - target: {fileID: 7907061888629067696, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+      propertyPath: timeBetweenMines
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7907061888629067697, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
       propertyPath: m_Name
       value: BossBattle_BigTank
@@ -17217,11 +17256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907061888629067699, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 127.75
       objectReference: {fileID: 0}
     - target: {fileID: 7907061888629067699, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.43
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 7907061888629067699, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17257,6 +17296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+--- !u!4 &7907061887366456946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3557889447807185402, guid: 4e5a4f918a50e9e4b96a80165dde4911, type: 3}
+  m_PrefabInstance: {fileID: 7907061887366456945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8626185591385130934
 PrefabInstance:
   m_ObjectHideFlags: 0
