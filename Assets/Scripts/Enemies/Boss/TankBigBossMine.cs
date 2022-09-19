@@ -11,6 +11,7 @@ Date:       15-09-2022 11:36:56
 ================================================*/
     
 public class TankBigBossMine : MonoBehaviour {
+    public const int MINE_EXPLODE_SFX = 3;
     public GameObject explosion;
     public float autoExplosionTime;
 
@@ -29,6 +30,7 @@ public class TankBigBossMine : MonoBehaviour {
     }
 
     public void Explode() {
+        AudioManager.instance.PlaySFX(MINE_EXPLODE_SFX);
         Destroy(gameObject);
         Instantiate(explosion, transform.position, transform.rotation);
     }

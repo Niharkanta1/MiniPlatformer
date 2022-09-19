@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3320961718922993970}
   - component: {fileID: 3320961718922993969}
   - component: {fileID: 3320961718922993981}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: TankBigBossBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

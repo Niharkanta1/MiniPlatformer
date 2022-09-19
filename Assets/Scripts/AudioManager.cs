@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour {
     public static AudioManager instance;
 
     public AudioSource[] soundEffects;
-    public AudioSource bgm, levelEndMusic;
+    public AudioSource bgm, levelEndMusic, bossMusic;
 
     private void Awake() {
         instance = this;
@@ -31,5 +31,15 @@ public class AudioManager : MonoBehaviour {
 
         soundEffects[soundToPlay].pitch = Random.Range(.9f * pitch, 1.1f * pitch);
         soundEffects[soundToPlay].Play();
+    }
+
+    public void PlayBossMusic() {
+        bgm.Stop();
+        bossMusic.Play();
+    }
+
+    public void StopBossMusic() {
+        bossMusic.Play();
+        bgm.Play();
     }
 }

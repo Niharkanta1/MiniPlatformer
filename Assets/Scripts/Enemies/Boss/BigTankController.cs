@@ -10,8 +10,8 @@ Date:       12-09-2022 19:25:46
 ================================================*/
     
 public class BigTankController : MonoBehaviour {
-
-    public enum BossState { shooting, hurt, moving };
+    private const int BOSS_HURT_SFX = 0;
+    public enum BossState { shooting, hurt, moving, ended };
     public BossState currentState;
 
     public Transform theBoss;
@@ -39,6 +39,13 @@ public class BigTankController : MonoBehaviour {
     public float timeBetweenMines;
     private float mineTimeCounter;
 
+    [Header("Health")]
+    public int health = 5;
+    public GameObject explosion;
+    public bool isDefeated;
+    public float shotSpeedUp;
+    public float mineSpeedUp;
+
     private void Start() {
         currentState = BossState.shooting;
     }
@@ -59,6 +66,11 @@ public class BigTankController : MonoBehaviour {
                     if(hurtTimeCounter <= 0) {
                         currentState = BossState.moving;
                         mineTimeCounter = timeBetweenMines;
+                        if(isDefeated) {
+                            theBoss.gameObject.SetActive(false);
+                            Instantiate(explosion, theBoss.position, theBoss.rotation);
+                            currentState = BossState.ended;
+                        }
                     }
                 }
                 break;
@@ -98,6 +110,15 @@ public class BigTankController : MonoBehaviour {
         currentState = BossState.hurt;
         hurtTimeCounter = hurtTime;
         anim.SetTrigger("Hit");
+        AudioManager.instance.PlaySFX(BOSS_HURT_SFX);
+        health--;
+        if(health <= 0) {
+            isDefeated = true;
+            AudioManager.instance.StopBossMusic();
+        } else { // Making boss harder as battle progresses
+            timeBetweenShots /= shotSpeedUp;
+            timeBetweenMines /= mineSpeedUp;
+        }
     }
 
     private void EndMovement() {
